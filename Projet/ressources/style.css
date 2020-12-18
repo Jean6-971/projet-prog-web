@@ -1,0 +1,118 @@
+/* Import d'une nouvelle police : 'Raleway'  */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+
+
+/* Enlever la marge et mettre une couleur de fond */
+body{
+    margin: 0px;
+    background-color: silver;
+}
+
+/* Redimensionner l'image  */
+header.header img {
+    width: 600px;
+    height: auto;
+}
+
+
+/* Sous-titre : centré, plus gros, en gras */
+header {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 140%;
+    font-weight: bold;
+}
+
+.Games{
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Game1{
+    background-image: url('pong.png');
+    background-size:contain;
+    background-position: center;
+    padding-left:10%; 
+    padding-right:10%; 
+    padding-bottom:14%; 
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+.pong{
+    background-color:white;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 160%;
+}
+
+.Game2{
+    background-image: url('puissance4.jpg');
+    background-size: cover;
+    padding-left:10%; 
+    padding-right:10%; 
+    padding-bottom:14%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.puissance4{
+    background-color:white;
+    text-align: center;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 160%;
+}
+
+.Game3{
+    background-image: url('snake.jpg');
+    background-size: cover;
+    padding-left:10%; 
+    padding-right:10%; 
+    padding-bottom:14%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-right: 5%;
+}
+.snake{
+    background-color: white;
+    text-align: center;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 160%;
+}
+
+
+hr{
+    margin: 200px auto; /* hauteur */
+    margin-bottom: 20px;
+    width: 90%; /* largeur */
+    height: 2px; /* épaisseur */
+    background-color: darkslategray;
+    border: none; /*on supprime le style par défaut*/
+
+}
+
+
+.footer{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+
+
+
+/* Style pour la page pong */
+canvas{
+    background-color: rgb(37, 34, 34);
+    display:block;
+    margin: auto;
+    margin-top: 5vh;
+}
