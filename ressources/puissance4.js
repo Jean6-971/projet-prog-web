@@ -20,7 +20,7 @@ function roundRect(x, y, w, h, radius)
     ctx.quadraticCurveTo(x, y, x+radius, y);
     ctx.fill();
 }
-roundRect(60, 40, 480, 380, 35);
+roundRect(35, 35, 480, 380, 35);
 
 // Affiche une unique "balle"
 function ball(posx, posy, rayon, couleur){
@@ -33,7 +33,7 @@ function ball(posx, posy, rayon, couleur){
 
 //affiche les cases libres au début du jeu. 8 colonnes, 6 lignes
 function drawGame(){
-    for(let i = 90; i<570; i+=60){
+    for(let i = 65; i<520; i+=60){
         for(let j = 90; j<420; j+=55){
             ball(i, j, 8.5, "white" );
         }   

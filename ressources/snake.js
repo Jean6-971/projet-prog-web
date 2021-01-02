@@ -1,77 +1,102 @@
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 
-var x = canvas.width/2;
-var y = canvas.height/2;
-var dx = 2;
-var dy = -2;
-var squareHeight = 20;
-var rightPressed = false;
-var leftPressed = false;
-var AppleX = Math.floor((Math.random() * (canvas.width-40))+20)
-var AppleY = Math.floor((Math.random() * (canvas.height-40))+20)
+var rect_w = canvas.width/10;
+var rect_h = canvas.height/10;
+var x_dir = [-1, 0, 1, 0];
+var y_dir = [0, -1, 0, 1];
+var level = 100;
+var snake_color = "lime";
+var tn = [];
+var queue = [];
+var snkln = 3;
+var map = [];
+var MR = Math.random;
+var X = 5 + (MR() * (rect_w - 10))|0;
+var Y = 5 + (MR() * (rect_h - 10))|0;
+var direction = MR() * 3 | 0;
+var interval = 0;
+var score = 0;
+var i, dir;
 
-function drawSquare() {
-    ctx.beginPath();
-    ctx.rect(x, y, squareHeight, squareHeight);
-    ctx.fillStyle = "lime";
-    ctx.fill();
-    ctx.closePath();
+for (i = 0; i < rect_w; i++) {
+    map[i] = [];
 }
 
-function drawApple() {
-    ctx.beginPath();
-    ctx.arc(AppleX, AppleY, 10, 0, Math.PI*2, false);
-    ctx.fillStyle = "red";
-    ctx.fill();
-    ctx.closePath();
+function random_apple() {
+    var x, y;
+    do {
+        x = MR() * rect_w|0;
+        y = MR() * rect_h|0;
+    }
+    while (map[x][y]);
+    map[x][y] = 1;
+    ctx.fillStyle = snake_color;
+    ctx.strokeStyle = "red"
+    ctx.strokeRect(x * 10+1, y * 10+1, 8, 8);
 }
-  
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawSquare();
-    drawApple()
-    if(y + dy > canvas.height-squareHeight || y + dy < 0) {
-        
-    }
-    if(x + dx > canvas.width-squareHeight || x + dx < 0) {
-        
-    }
-    if(rightPressed) {
-        x += dx;
-        if (x + squareHeight > canvas.width){
-            x = canvas.width - squareHeight;
+random_apple();
+
+function set_game_speed() {
+    if (tn.length) {
+        dir = tn.pop();
+        if ((dir % 2) !== (direction % 2)) {
+            direction = dir;
         }
     }
-    else if(leftPressed) {
-        x -= dx;
-        if (x < 0){
-            x = 0;
+    if ((0 <= X && 0 <= Y && X < rect_w && Y < rect_h) && 2 !== map[X][Y]) {
+        if (1 === map[X][Y]) {
+            score += 1;
+            var score_actu = document.getElementById("scoractu");
+            score_actu.innerHTML = "Votre score actuel:"+score;
+            random_apple();
+            snkln++;
+        }
+        ctx.fillRect(X * 10, Y * 10, 9, 9);
+        map[X][Y] = 2;
+        queue.unshift([X, Y]);
+        X+= x_dir[direction];
+        Y+= y_dir[direction];
+        if (snkln < queue.length) {
+            dir = queue.pop()
+            map[dir[0]][dir[1]] = 0;
+            ctx.clearRect(dir[0] * 10, dir[1] * 10, 10, 10);
         }
     }
-
-
-}
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = true;
-    }
-    else if(e.key == "Left" || e.key == "ArrowLeft") {
-        leftPressed = true;
+    else if (!tn.length) {
+        var show_score = document.getElementById("gameover");
+        show_score.innerHTML = "<h1>Perdu !<br><br><u>Votre score : "+score+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
+        document.getElementById("canvas").style.display = 'none';
+        document.getElementById("scoractu").style.display = 'none';
+        window.clearInterval(interval);
+        
     }
 }
 
-function keyUpHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = false;
+interval = window.setInterval(set_game_speed, level);
+
+document.onkeydown = function(e) {
+    var code = 0;
+    switch(e.code) {
+        case "KeyS":
+        case "ArrowDown":
+            code = 3;
+            break;
+        case "KeyW":
+        case "ArrowUp":
+            code = 1;
+            break;
+        case "KeyA":
+        case "ArrowLeft":
+            code = 0;
+            break;
+        case "KeyD":
+        case "ArrowRight":
+            code = 2;
+            break;
     }
-    else if(e.key == "Left" || e.key == "ArrowLeft") {
-        leftPressed = false;
+
+    if (0 <= code && code < 4 && code !== tn[0]) {
+        tn.unshift(code);
     }
 }
-
-setInterval(draw, 10);
