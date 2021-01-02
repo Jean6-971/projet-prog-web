@@ -32,7 +32,11 @@ function random_apple() {
     while (map[x][y]);
     map[x][y] = 1;
     ctx.fillStyle = snake_color;
-    ctx.strokeStyle = "red"
+    var gradient = ctx.createLinearGradient(canvas.width * MR(), canvas.height * MR(), canvas.width * MR(), canvas.height * MR());
+    gradient.addColorStop("0" ,"yellow");
+    gradient.addColorStop("0.5", "lime");
+    gradient.addColorStop("1.0", "red");
+    ctx.strokeStyle = gradient;
     ctx.strokeRect(x * 10+1, y * 10+1, 8, 8);
 }
 random_apple();
