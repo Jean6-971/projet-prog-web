@@ -5,7 +5,7 @@ var rect_w = canvas.width/10;
 var rect_h = canvas.height/10;
 var x_dir = [-1, 0, 1, 0];
 var y_dir = [0, -1, 0, 1];
-var level = 50;
+var level = 100;
 var snake_color = "lime";
 var tn = [];
 var queue = [];
@@ -18,6 +18,9 @@ var direction = MR() * 3 | 0;
 var interval = 0;
 var score = 0;
 var i, dir;
+
+var score_actu = document.getElementById("scoractu");
+score_actu.innerHTML = "Votre score actuel : "+score;
 
 for (i = 0; i < rect_w; i++) {
     map[i] = [];
@@ -52,15 +55,15 @@ function set_game_speed() {
         if (1 === map[X][Y]) {
             score += 1;
             var score_actu = document.getElementById("scoractu");
-            score_actu.innerHTML = "Votre score actuel:"+score;
+            score_actu.innerHTML = "Votre score actuel : "+score;
             random_apple();
             snkln++;
         }
         ctx.fillRect(X * 10, Y * 10, 9, 9);
         map[X][Y] = 2;
         queue.unshift([X, Y]);
-        X+= x_dir[direction];
-        Y+= y_dir[direction];
+        X += x_dir[direction];
+        Y += y_dir[direction];
         if (snkln < queue.length) {
             dir = queue.pop()
             map[dir[0]][dir[1]] = 0;
