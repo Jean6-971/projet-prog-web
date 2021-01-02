@@ -20,6 +20,19 @@ var score = 0;
 easy = 0;
 var i, dir;
 
+function addPerson(person, score) {
+    const tablePersons = document.getElementById("tblPersons");
+    const personRow = document.createElement("TR");
+    const nameCell = document.createElement("TD");
+    const scoreCell = document.createElement("TD");
+    nameCell.innerText = person;
+    scoreCell.innerText = score;
+        
+    personRow.appendChild(nameCell);
+    personRow.appendChild(scoreCell);
+    tablePersons.appendChild(personRow);
+}
+
 for (i = 0; i < rect_w; i++) {
     map[i] = [];
 }
@@ -67,11 +80,19 @@ function set_game_speed() {
         }
     }
     else if (!tn.length) {
-        
+        var txt;
+        var person = prompt("Please enter your name:", "Harry Potter");
+        if (person == null || person == "") {
+            txt = "User cancelled the prompt.";
+        } else {
+            txt = "Hello " + person + "! How are you today?";
+        }
+        document.getElementById("alert").innerHTML = txt;
         var show_score = document.getElementById("gameover");
         show_score.innerHTML = "Perdu !<br /> <u>Votre score:</u> <b>"+score+"</b><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
         document.getElementById("canvas").style.display = 'none';
         window.clearInterval(interval);
+        
     }
 }
 
@@ -84,3 +105,5 @@ document.onkeydown = function(e) {
         tn.unshift(code);
     }
 }
+
+addPerson(person, score);
