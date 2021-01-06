@@ -18,6 +18,7 @@ let tmpdir = [];
 let direction = MR() * 3 | 0;
 let queue = [];
 
+let level = 100;
 let interval = 0;
 let score = 0;
 let i, dir;
@@ -82,7 +83,7 @@ function set_game_speed() {
     }
 }
 
-interval = window.setInterval(set_game_speed, 100);
+interval = window.setInterval(set_game_speed, level);
 
 document.onkeydown = function(e) {
     let code = 0;
@@ -103,9 +104,22 @@ document.onkeydown = function(e) {
         case "ArrowRight":
             code = 2;
             break;
+        case "Space":
+            code = 4;
+            break;
     }
 
     if (0 <= code && code < 4 && code !== tmpdir[0]) {
         tmpdir.unshift(code);
     }
+    else if (4 == code) {
+        if (interval) {
+            window.clearInterval(interval);
+            interval = 0;
+        }
+        else {
+            interval = window.setInterval(set_game_speed, level);
+        }
+    }
+
 }
