@@ -1,10 +1,23 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
-let x = canvas.width/2;
-let y = canvas.height-60;
 let dx = 2;
 let dy = 2;
+
+//angle aléatoire au début
+let aléat1 = Math.random();
+let aléat2 = Math.random();
+if(aléat1<0.5){
+    dx=-2;
+}
+if(aléat2<0.5){
+    dy=-2;
+}
+
+
+let x = canvas.width/2 ;
+let y = Math.floor((Math.random() * (canvas.height-40))+20);
+
 let rayonBall = 10;
 
 let espaceBord = 10;
@@ -19,6 +32,8 @@ let upPressed = false;
 
 let zPressed = false;
 let sPressed = false;
+
+let spacePressed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -38,6 +53,9 @@ function keyDownHandler(event){
     else if(event.keyCode == "83"){ //touche s
         sPressed = true;
     }
+    else if(event.keyCode == "4"){ // touche espace
+        spacePressed = true;
+    }
 }
 
 //si les touches sont relâchées
@@ -53,6 +71,9 @@ function keyUpHandler(event) {
     }
     else if(event.keyCode == "83"){ //touche s
         sPressed = false;
+    }
+    else if(event.keyCode == "4"){ //touche espace
+        spacePressed = false;
     }
 }
 
@@ -98,8 +119,8 @@ function drawPaddle2(){
 function Game(joueur1, joueur2){
     ctx.font='30px Calibri';
     if(joueur1<5 && joueur2<5){
-        ctx.fillText(joueur1, canvas.width/4 -9 , 40);
-        ctx.fillText(joueur2, 3*canvas.width/4 -7, 40);
+        ctx.fillText("J1 : " + joueur1, canvas.width/4 -30, 40);
+        ctx.fillText("J2 : " + joueur2, 3*canvas.width/4 -30, 40);
         ctx.fillStyle = "#EFF1F5";
    }
     else if(joueur1==5){
@@ -134,12 +155,14 @@ function bonusMalus(couleurAl, position_y_1, position_y_2, vitesse){
         drawBall(DepVertical2 + vitesse, DepHorizontal2, 15, "green");
         // Joueur Gauche a t-il le bonus?
         if(DepVertical1<espaceBord+paddleX+15){
+            console.log("test");
             if(DepHorizontal1>Defilement1 && DepHorizontal1<Defilement1+paddleY1){
                 paddleY1+=15;
             }
         }
         //Joueur Droit a t-il le bonus?
         if(DepVertical2<espaceBord+paddleX+15){
+            console.log("test");
             if(DepHorizontal2>Defilement2 && DepHorizontal2<Defilement2+paddleY2){
                 paddleY2+=15;
             }
@@ -151,12 +174,14 @@ function bonusMalus(couleurAl, position_y_1, position_y_2, vitesse){
         drawBall(DepVertical2 + vitesse, DepHorizontal2, 15, "red");
         // Joueur Gauche a t-il le bonus?
         if(DepVertical1<espaceBord+paddleX+15){
+            console.log("test");
             if(DepHorizontal1>Defilement1 && DepHorizontal1<Defilement1+paddleY1){
                 paddleY1-=20;
             }
         }
         //Joueur Droit a t-il le bonus?
         if(DepVertical2<espaceBord+paddleX+15){
+            console.log("test");
             if(DepHorizontal2>Defilement2 && DepHorizontal2<Defilement2+paddleY2){
                 paddleY2-=20;
             }
@@ -173,8 +198,8 @@ let compteur = 0 ;
 let vitesse=0;
 
 function draw(){
-    console.log(couleurAléatoire);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     drawTiret();
     drawPaddle1();
     drawPaddle2();
@@ -204,7 +229,7 @@ function draw(){
         else {
             ptsjoueur2+=1;
             x = canvas.width/2;
-            y = canvas.height-60;
+            y = Math.floor((Math.random() * (canvas.height-40))+20);
             Defilement1= (canvas.height-paddleY1)/2;
             Defilement2= (canvas.height-paddleY1)/2;
             compteur = 0;
@@ -222,7 +247,7 @@ function draw(){
         else {
             ptsjoueur1+=1;
             x = canvas.width/2;
-            y = canvas.height-60;
+            y = Math.floor((Math.random() * (canvas.height-40))+20);
             Defilement1= (canvas.height-paddleY2)/2;
             Defilement2= (canvas.height-paddleY2)/2;
             compteur=0;
@@ -231,17 +256,17 @@ function draw(){
     }
            
     // Contrôle clavier
-    if(upPressed && Defilement1>0){
-        Defilement1 -= 4;
-    }
-    if(downPressed && Defilement1+paddleY1<canvas.height){
-        Defilement1 += 4;
-    }
-    if(zPressed && Defilement2>0){
+    if(upPressed && Defilement2>0){
         Defilement2 -= 4;
     }
-    if(sPressed && Defilement2+paddleY2<canvas.height){
+    if(downPressed && Defilement2+paddleY2<canvas.height){
         Defilement2 += 4;
+    }
+    if(zPressed && Defilement1>0){
+        Defilement1 -= 4;
+    }
+    if(sPressed && Defilement1+paddleY1<canvas.height){
+        Defilement1 += 4;
     }
     
     y+=dy;
