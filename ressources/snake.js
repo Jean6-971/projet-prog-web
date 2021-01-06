@@ -48,7 +48,6 @@ function random_apple() {
 random_apple();
 
 function set_game_speed() {
-    console.log(tmpdir.length)
     if (tmpdir.length) {
         dir = tmpdir.pop();
         if ((dir % 2) !== (direction % 2)) {
@@ -83,7 +82,7 @@ function set_game_speed() {
     }
 }
 
-interval = window.setInterval(set_game_speed, 50);
+interval = window.setInterval(set_game_speed, 100);
 
 document.onkeydown = function(e) {
     let code = 0;
