@@ -1,28 +1,28 @@
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
 
-var MR = Math.random;
+let MR = Math.random;
 
-var rect_w = canvas.width/10;
-var rect_h = canvas.height/10;
-var snkln = 3;
-var snake_color = "lime";
+let rect_w = canvas.width/10;
+let rect_h = canvas.height/10;
+let snkln = 3;
+let snake_color = "lime";
 
-var X = 5 + (MR() * (rect_w - 10))|0;
-var Y = 5 + (MR() * (rect_h - 10))|0;
-var x_dir = [-1, 0, 1, 0];
-var y_dir = [0, -1, 0, 1];
+let X = 5 + (MR() * (rect_w - 10))|0;
+let Y = 5 + (MR() * (rect_h - 10))|0;
+let x_dir = [-1, 0, 1, 0];
+let y_dir = [0, -1, 0, 1];
 
-var carte = [];
-var tmpdir = [];
-var direction = MR() * 3 | 0;
-var queue = [];
+let carte = [];
+let tmpdir = [];
+let direction = MR() * 3 | 0;
+let queue = [];
 
-var interval = 0;
-var score = 0;
-var i, dir;
+let interval = 0;
+let score = 0;
+let i, dir;
 
-var score_actu = document.getElementById("scoractu");
+let score_actu = document.getElementById("scoractu");
 score_actu.innerHTML = "Votre score actuel : " + score;
 
 for (i = 0; i < rect_w; i++) {
@@ -30,7 +30,7 @@ for (i = 0; i < rect_w; i++) {
 }
 
 function random_apple() {
-    var x, y;
+    let x, y;
     do {
         x = MR() * rect_w|0;
         y = MR() * rect_h|0;
@@ -38,7 +38,7 @@ function random_apple() {
     while (carte[x][y]);
     carte[x][y] = 1;
     ctx.fillStyle = snake_color;
-    var gradient = ctx.createLinearGradient(canvas.width * MR(), canvas.height * MR(), canvas.width * MR(), canvas.height * MR());
+    let gradient = ctx.createLinearGradient(canvas.width * MR(), canvas.height * MR(), canvas.width * MR(), canvas.height * MR());
     gradient.addColorStop("0" ,"yellow");
     gradient.addColorStop("0.5", "lime");
     gradient.addColorStop("1.0", "red");
@@ -48,6 +48,7 @@ function random_apple() {
 random_apple();
 
 function set_game_speed() {
+    console.log(tmpdir.length)
     if (tmpdir.length) {
         dir = tmpdir.pop();
         if ((dir % 2) !== (direction % 2)) {
@@ -57,7 +58,7 @@ function set_game_speed() {
     if ((0 <= X && 0 <= Y && X < rect_w && Y < rect_h) && 2 !== carte[X][Y]) {
         if (1 === carte[X][Y]) {
             score += 1;
-            var score_actu = document.getElementById("scoractu");
+            let score_actu = document.getElementById("scoractu");
             score_actu.innerHTML = "Votre score actuel : "+score;
             random_apple();
             snkln++;
@@ -71,22 +72,22 @@ function set_game_speed() {
             dir = queue.pop()
             carte[dir[0]][dir[1]] = 0;
             ctx.clearRect(dir[0] * 10, dir[1] * 10, 10, 10);
+            
         }
     }
     else if (!tmpdir.length) {
-        var show_score = document.getElementById("gameover");
+        let show_score = document.getElementById("gameover");
         show_score.innerHTML = "<h1>Perdu !<br><br><u>Votre score : "+score+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
         document.getElementById("canvas").style.display = 'none';
         document.getElementById("scoractu").style.display = 'none';
         window.clearInterval(interval);
-        
     }
 }
 
-interval = window.setInterval(set_game_speed, 100);
+interval = window.setInterval(set_game_speed, 50);
 
 document.onkeydown = function(e) {
-    var code = 0;
+    let code = 0;
     switch(e.code) {
         case "KeyS":
         case "ArrowDown":
