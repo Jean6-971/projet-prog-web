@@ -107,6 +107,18 @@ document.onkeydown = function(e) {
         case "Space":
             code = 4;
             break;
+        case "KeyK":
+            code = 5;
+            break;
+        case "KeyL":
+            code = 6;
+            break;
+        case "KeyB":
+            code = 7;
+            break;
+        case "KeyP":
+            code = 8;
+            break;
     }
 
     if (0 <= code && code < 4 && code !== tmpdir[0]) {
@@ -121,5 +133,24 @@ document.onkeydown = function(e) {
             interval = window.setInterval(set_game_speed, level);
         }
     }
-
+    else if (5 == code) {
+        window.clearInterval(interval);
+        level = 150;
+        interval = window.setInterval(set_game_speed, level); 
+    }
+    else if (6 == code) {
+        window.clearInterval(interval);
+        level = 100;
+        interval = window.setInterval(set_game_speed, level); 
+    }
+    else if (7 == code) {
+        window.clearInterval(interval);
+        level = 50;
+        interval = window.setInterval(set_game_speed, level); 
+    }
+    else if (8 == code) {
+        window.clearInterval(interval);
+        level = 10;
+        interval = window.setInterval(set_game_speed, level); 
+    }
 }
