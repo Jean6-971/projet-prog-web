@@ -1,6 +1,9 @@
 console.log("Hello world");
 
-function Regles(){
+function ReglesPong(){
     alert("Pour jouer à Pong : \nJoueur 1 : Z et S \nJoueur 2 : flèche du haut et flèche du bas");
 }
 
+function ReglesSnake(){
+    alert("Pour jouer à Snake : \nUtilisez les flèches directionnelles ou les touches Z,Q,S,D pour déplacer le serpent afin de manger les pommes \nEspace pour faire pause \nLes touches K,L,M,B permettent de changer la difficulté");
+}
