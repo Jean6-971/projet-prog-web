@@ -21,22 +21,21 @@ let queue = [];
 let level = 100;
 let interval = 0;
 let score = 0;
-let i, dir;
+let i = 0;
+let dir;
 
 let score_actu = document.getElementById("scoractu");
 score_actu.innerHTML = "Votre score actuel : " + score;
 
-for (i = 0; i < rect_w; i++) {
+while (i < rect_w) {
     carte[i] = [];
+    i++
 }
 
 function random_apple() {
     let x, y;
-    do {
-        x = MR() * rect_w|0;
-        y = MR() * rect_h|0;
-    }
-    while (carte[x][y]);
+    x = MR() * rect_w|0;
+    y = MR() * rect_h|0;
     carte[x][y] = 1;
     ctx.fillStyle = snake_color;
     let gradient = ctx.createLinearGradient(canvas.width * MR(), canvas.height * MR(), canvas.width * MR(), canvas.height * MR());
@@ -77,7 +76,7 @@ function set_game_speed() {
     else if (!tmpdir.length) {
         let show_score = document.getElementById("gameover");
         show_score.innerHTML = "<h1>Perdu !<br><br><u>Votre score : "+score+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
-        document.getElementById("canvas").style.display = 'none';
+        document.getElementById("canvas").remove();
         document.getElementById("scoractu").remove();
         window.clearInterval(interval);
     }
