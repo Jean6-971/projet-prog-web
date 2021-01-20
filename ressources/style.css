@@ -100,6 +100,13 @@ canvas{
     background-color:black;
     display:block;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 0;
     border: 5px solid navy;
+}
+
+#regles{
+    position:absolute;
+    top:200px;
+    width:31%;
+    margin-left: 10px;
 }
