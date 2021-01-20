@@ -116,3 +116,10 @@ canvas{
     width:30%;
     margin-right: 10px;
 }
+
+.Session{
+    position:absolute;
+    top:200px;
+    width:30%;
+    margin-left: 10px;
+}
