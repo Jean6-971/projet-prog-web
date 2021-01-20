@@ -57,7 +57,7 @@ function deplacement_serpent() {
         localStorage.setItem('score',snkln);
         myMaxScore = localStorage.getItem('score');
     }
-    long_actu.innerHTML = "Votre longueur actuel : " + snkln + "<br>Votre longueur maximale : " + myMaxScore;
+    long_actu.innerHTML = "Votre longueur actuel : " + snkln + "<br><br>Votre longueur maximale : " + myMaxScore;
     if (tmpdir.length) {
         dir = tmpdir.pop();
         if ((dir % 2) !== (direction % 2)) {

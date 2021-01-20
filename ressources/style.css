@@ -85,11 +85,11 @@ hr{
     font-family: 'Raleway', sans-serif;
     font-weight: bold;
     color: black;
-    position:absolute;
-    bottom:0;
+    bottom:0px;
+    position: absolute;
     width:100%;
-    padding-top:50px;
-    height:80px;
+    padding-top:0px;
+    height:100px;
 }
 
 
@@ -107,4 +107,12 @@ canvas{
     top:200px;
     width:30%;
     margin-left: 10px;
+}
+
+#longactu{
+    position:absolute;
+    top:200px;
+    right:0px;
+    width:30%;
+    margin-right: 10px;
 }
