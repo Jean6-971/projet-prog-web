@@ -32,7 +32,7 @@ while (i < rect_w) {
     i++
 }
 
-function random_apple() {
+function pomme_aleatoire() {
     let x, y;
     x = MR() * rect_w|0;
     y = MR() * rect_h|0;
@@ -45,9 +45,9 @@ function random_apple() {
     ctx.strokeStyle = gradient;
     ctx.strokeRect(x * 10+1, y * 10+1, 8, 8);
 }
-random_apple();
+pomme_aleatoire();
 
-function set_game_speed() {
+function deplacement_serpent() {
     if (tmpdir.length) {
         dir = tmpdir.pop();
         if ((dir % 2) !== (direction % 2)) {
@@ -82,7 +82,7 @@ function set_game_speed() {
     }
 }
 
-interval = window.setInterval(set_game_speed, level);
+interval = window.setInterval(deplacement_serpent, level);
 
 document.onkeydown = function(e) {
     let code = 0;
