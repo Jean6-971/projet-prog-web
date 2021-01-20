@@ -5,7 +5,7 @@ let MR = Math.random;
 
 let rect_w = canvas.width/10;
 let rect_h = canvas.height/10;
-let snkln = 3;
+let snkln = 1;
 let snake_color = "lime";
 
 let X = 5 + (MR() * (rect_w - 10))|0;
@@ -20,12 +20,11 @@ let queue = [];
 
 let level = 100;
 let interval = 0;
-let score = 0;
 let i = 0;
 let dir;
 
-let score_actu = document.getElementById("scoractu");
-score_actu.innerHTML = "Votre score actuel : " + score;
+let long_actu = document.getElementById("longactu");
+long_actu.innerHTML = "Votre longueur actuel : " + snkln;
 
 while (i < rect_w) {
     carte[i] = [];
@@ -56,10 +55,9 @@ function deplacement_serpent() {
     }
     if ((0 <= X && 0 <= Y && X < rect_w && Y < rect_h) && 2 !== carte[X][Y]) {
         if (1 === carte[X][Y]) {
-            score += 1;
-            score_actu.innerHTML = "Votre score actuel : " + score;
-            random_apple();
-            snkln++;
+            snkln+=5;
+            long_actu.innerHTML = "Votre longueur actuel : " + snkln;
+            pomme_aleatoire();
         }
         ctx.fillRect(X * 10, Y * 10, 9, 9);
         carte[X][Y] = 2;
@@ -74,10 +72,10 @@ function deplacement_serpent() {
         }
     }
     else if (!tmpdir.length) {
-        let show_score = document.getElementById("gameover");
+        let show_long = document.getElementById("gameover");
         document.getElementById("canvas").remove();
-        document.getElementById("scoractu").remove();
-        show_score.innerHTML = "<h1>Perdu !<br><br><u>Votre score : "+score+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
+        document.getElementById("longactu").remove();
+        show_long.innerHTML = "<h1>Perdu !<br><br><u>Votre longueur finale : "+snkln+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
         window.clearInterval(interval);
     }
 }
