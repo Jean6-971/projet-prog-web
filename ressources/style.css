@@ -23,6 +23,18 @@ header {
     font-weight: bold;
 }
 
+.about {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 140%;
+    font-weight: bold;
+}
+
+.list {
+    display: inline-block;
+    text-align: left;
+}
+
 .Games{
     margin-top: 80px;
     display: flex;
