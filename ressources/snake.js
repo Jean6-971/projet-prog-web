@@ -57,7 +57,7 @@ function set_game_speed() {
     if ((0 <= X && 0 <= Y && X < rect_w && Y < rect_h) && 2 !== carte[X][Y]) {
         if (1 === carte[X][Y]) {
             score += 1;
-            score_actu.innerHTML = "Votre score actuel : "+score;
+            score_actu.innerHTML = "Votre score actuel : " + score;
             random_apple();
             snkln++;
         }
@@ -75,9 +75,9 @@ function set_game_speed() {
     }
     else if (!tmpdir.length) {
         let show_score = document.getElementById("gameover");
-        show_score.innerHTML = "<h1>Perdu !<br><br><u>Votre score : "+score+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
         document.getElementById("canvas").remove();
         document.getElementById("scoractu").remove();
+        show_score.innerHTML = "<h1>Perdu !<br><br><u>Votre score : "+score+"<br><br><input type='button' value='Rejouer' onclick='window.location.reload();' />";
         window.clearInterval(interval);
     }
 }
